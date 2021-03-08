@@ -4,6 +4,74 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 *::before {
 	box-sizing: border-box;
 }
+.curtain {
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.curtain__wrapper {
+  width: 100%;
+  height: 100%;
+}
+.curtain__wrapper input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+.curtain__wrapper input[type=checkbox]:checked ~ div.curtain__panel--left {
+  transform: translateX(0);
+}
+.curtain__wrapper input[type=checkbox]:checked ~ div.curtain__panel--right {
+  transform: translateX(0);
+}
+.curtain__panel {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  float: left;
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  transition: all 1s ease-out;
+  z-index: 2;
+}
+.curtain__panel--left {
+  justify-content: flex-end;
+  background: url(../img/leaves2.png);
+  transform: translateX(-100%);
+	background-repeat: repeat-y;
+	background-position-x: right;
+}
+.curtain__panel--right {
+  justify-content: flex-start;
+	background: url(../img/leaves.png);
+  transform: translateX(100%);
+	background-repeat: repeat-y;
+	background-position-x: left;
+}
+.curtain__content {
+  align-items: center;
+  background: #333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  padding: 1rem 0;
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+}
+.curtain__content img {
+  width: 20%;
+}
 
 body {
 	--color-text: #fff;
@@ -18,7 +86,7 @@ body {
 	--color-item-alt: #494d54;
 	--color-quote: #5b677a;
 	--color-info: #57535a;
-	--color-title: #e23434;
+	--color-title: #ffffff;
 	--color-tagline: #e2e2e2;
 	font-family: "europa", Futura, Arial, sans-serif;
 	min-height: 100vh;
@@ -190,7 +258,7 @@ main {
 	font-family: "sabbath-black", serif;
 	font-size: 14vw;
 	font-weight: normal;
-	mix-blend-mode: screen;
+	mix-blend-mode: overlay;
 	line-height: 0.8;
 	text-transform: lowercase;
 	margin: 0;
@@ -200,10 +268,11 @@ main {
 }
 
 .content__tagline {
-	color: var(--color-tagline);
+	color: #000000;
 	margin: 1rem 0 0 0;
 	font-weight: bold;
 	font-size: 1rem;
+	mix-blend-mode: overlay;
 	letter-spacing: 0.125rem;
 	word-spacing: 0.25rem;
 	text-transform: uppercase;
@@ -301,7 +370,7 @@ main {
 	background: var(--color-bg-item5);
 }
 
-.menu__item--4, 
+.menu__item--4,
 .menu__item--5 {
 	display: none;
 }
@@ -385,6 +454,7 @@ main {
 	font-size: 0.95rem;
 }
 
+
 @media screen and (min-width: 53em) {
 	body {
 		padding: 0;
@@ -413,7 +483,7 @@ main {
 		pointer-events: none;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: 
+		grid-template-areas:
 		'codropsheader info'
 		'... ...'
 		'github ...';
@@ -446,7 +516,7 @@ main {
 		left: 0;
 		grid-template-columns: 20% 30% 50%;
 		grid-template-rows: 60% 40%;
-		grid-template-areas: 
+		grid-template-areas:
             "item3 item2 item1"
             "item4 item5 item1";
 	}
@@ -468,7 +538,7 @@ main {
 	.menu__item--5 {
 		grid-area: item5;
 	}
-	.menu__item--4, 
+	.menu__item--4,
 	.menu__item--5 {
 		display: block;
 	}
@@ -540,7 +610,7 @@ main {
 		counter-increment: menuitem;
 		content: counters(menuitem, "", decimal-leading-zero);
 		position: absolute;
-	    font-size: 0.85rem;	
+	    font-size: 0.85rem;
 	    top: 25%;
 	    left: -1.25rem;
 	    color: var(--color-item-alt);
